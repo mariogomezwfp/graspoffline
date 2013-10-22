@@ -100,8 +100,8 @@ namespace GRASPOfflineProcessor
             List<string> rosters = new List<string>();
             foreach (string data in currentForms)
             {
-                
-                f = File.Create(folderBrowserDialog1.SelectedPath + "\\output\\" + data + ".csv");
+
+                f = File.Create(folderBrowserDialog1.SelectedPath + "\\output\\" + textBox2.Text + data + ".csv");
                 sw = new StreamWriter(f);
 
                 command = new SQLiteCommand("SELECT instanceFilePath FROM forms where displayName='" +
@@ -125,7 +125,7 @@ namespace GRASPOfflineProcessor
                     else if (datanode.ChildNodes.Count > 1) // ROSTER
                     {
                         // Create datafile for roaster:
-                        FileStream roster_file = File.Create(folderBrowserDialog1.SelectedPath + "\\output\\" + data + "_" + datanode.Name + ".csv");
+                        FileStream roster_file = File.Create(folderBrowserDialog1.SelectedPath + "\\output\\" + textBox2.Text + data + "_" + datanode.Name + ".csv");
                         StreamWriter r_writer = new StreamWriter(roster_file);
                         r_writer.Write("formId,");
                         foreach (XmlNode subNode in datanode.ChildNodes)
@@ -159,13 +159,13 @@ namespace GRASPOfflineProcessor
                             }
                             else
                             {
-                                sw.Write("--,");
+                                sw.Write("empty,");
                             }
                         }
-                        else if (datanode.ChildNodes.Count > 1) // ROSTER
+                        else if (datanode.ChildNodes.Count > 1) // PROCESS ROSTER
                         {
                             // Create datafile for roaster:
-                            FileStream roster_file = File.Open(folderBrowserDialog1.SelectedPath + "\\output\\" + data + "_" + datanode.Name + ".csv", FileMode.Append, FileAccess.Write);
+                            FileStream roster_file = File.Open(folderBrowserDialog1.SelectedPath + "\\output\\" + textBox2.Text + data + "_" + datanode.Name + ".csv", FileMode.Append, FileAccess.Write);
                             StreamWriter r_writer = new StreamWriter(roster_file);
                             
 
@@ -175,8 +175,9 @@ namespace GRASPOfflineProcessor
                             {
                                 XmlDocument newDoc = new XmlDocument();
 
+                                // Treat each field as a new XML Document
+                                // TO DO: Change to XPath or something else.
                                 newDoc.LoadXml("<"+node.Name+">"+node.InnerXml+"</"+node.Name+">");
-                
 
                                 r_writer.Write(path[path.Length - 1] + ",");
                                 foreach (XmlNode subNode in datanode.ChildNodes)
@@ -188,7 +189,7 @@ namespace GRASPOfflineProcessor
                                     }
                                     else
                                     {
-                                        r_writer.Write("--,");
+                                        r_writer.Write("empty,");
                                     }
                                 }
                                 r_writer.Write("\r\n");
@@ -222,6 +223,7 @@ namespace GRASPOfflineProcessor
                 else
                 {
                     message("Error: The selected directory isn't a valid GRASP directory.");
+                    button2.Enabled = false;
                 }
             }
             else
