@@ -87,11 +87,7 @@ namespace GRASPOfflineProcessor
             }
             FileStream f;
             StreamWriter sw;
-
-            XmlNodeList enumId;
-            XmlNodeList sample_id;
-            XmlNodeList sample_name;
-
+            
             XmlDocument spec = new XmlDocument();
             XmlNodeList spec_data;
 
@@ -147,7 +143,7 @@ namespace GRASPOfflineProcessor
                     doc.Load(folderBrowserDialog1.SelectedPath + "\\instances\\" + path[path.Length - 2] + "\\" + path[path.Length - 1]);
 
 
-                    sw.Write(path[path.Length - 1] + ",");
+                    sw.Write(textBox2.Text + path[path.Length - 1] + ",");
                     foreach (XmlNode datanode in spec_data[0].ChildNodes)
                     {
                         if (datanode.ChildNodes.Count == 0)
@@ -179,7 +175,7 @@ namespace GRASPOfflineProcessor
                                 // TO DO: Change to XPath or something else.
                                 newDoc.LoadXml("<"+node.Name+">"+node.InnerXml+"</"+node.Name+">");
 
-                                r_writer.Write(path[path.Length - 1] + ",");
+                                r_writer.Write(textBox2.Text + path[path.Length - 1] + ",");
                                 foreach (XmlNode subNode in datanode.ChildNodes)
                                 {
                                     valuenode = newDoc.GetElementsByTagName(subNode.Name);
