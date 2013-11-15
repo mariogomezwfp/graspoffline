@@ -19,11 +19,6 @@ This tool was developed by WFP in El Salvador country office.
 For more information contact < mario.gomez _at_ wfp.org > or
 < wfpsansalvador _at_ wfp.org >.
 
-
-Disclaimer
-==========
-This software is provided as is.
-
 License
 =======
     GRASP Offline Processor
