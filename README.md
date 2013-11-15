@@ -9,8 +9,8 @@ imported to data processing and analisys tools.
 
 GRASP is capable of transmitting questionnaires results via Internet or SMS
 but in case that an offline tool is needed or there is no cellphone coverage
-the questionnaires can be copied to an USB stick and can be processed later
-in a offline matter.
+the questionnaires can be copied to an USB stick and can be processed offline
+later.
 
 Credits
 =======
